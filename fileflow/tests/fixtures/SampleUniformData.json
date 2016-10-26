@@ -1,0 +1,22 @@
+[
+  {
+    "name": "pearl",
+    "color": "white",
+    "number": 1
+  },
+  {
+    "name": "ruby",
+    "number": 5,
+    "color": "red"
+  },
+  {
+    "name": "sapphire",
+    "color": "blue",
+    "number": 1
+  },
+  {
+    "name": "amethyst",
+    "color": "violet",
+    "number": 1
+  }
+]
