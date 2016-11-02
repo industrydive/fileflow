@@ -11,7 +11,7 @@ if not airflow_configuration.has_option('fileflow','environment'):
     airflow_configuration.set('fileflow','environment','production')
 
 if not airflow_configuration.has_option('fileflow','storage_prefix'):
-    airflow_configuration.set('fileflow','storage_prefix','file')
+    airflow_configuration.set('fileflow','storage_prefix','storage')
 
 if not airflow_configuration.has_option('fileflow', 'storage_type'):
     airflow_configuration.set('fileflow', 'storage_type', 'file')
