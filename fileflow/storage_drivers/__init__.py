@@ -31,7 +31,18 @@ def get_storage_driver(
     :rtype: datadive.storagedrivers.StorageDriver
     """
 
-    import settings  # TODO: this must be changed to use airflow config
+    # import settings  # TODO: this must be changed to use airflow config
+    class FakeSettings(object):
+        def __init__(self):
+            self.ENVIRONMENT = 'test'
+            self.STORAGE_PREFIX = 'tests/test-output'
+            self.STORAGE_TYPE = 'file'
+            self.AWS_ACCESS_KEY_ID = 'keyid'
+            self.AWS_BUCKET_NAME = 'bucket'
+            self.AWS_SECRET_ACCESS_KEY = 'key'
+
+    settings = FakeSettings()
+
     from fileflow.errors import FileflowError
 
     # Initialize all the things.
