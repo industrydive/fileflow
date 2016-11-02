@@ -7,11 +7,11 @@ Fileflow is a collection of modules that support data transfer between Airflow t
 ### Resources
 
 - Read the docs at [readthedocs.io](http://fileflow.readthedocs.io/en/latest/).
-- Learn about why Industry Dive chose to make fileflow with [this video from PyData DC 2016](https://www.youtube.com/watch?v=60FUHEkcPyY&index=35&list=PLGVZCDnMOq0qLoYpkeySVtfdbQg1A_GiB) given by contributor @lauralorenz
+- Learn about why Industry Dive chose to make fileflow with [this video from PyData DC 2016](https://www.youtube.com/watch?v=60FUHEkcPyY&index=35&list=PLGVZCDnMOq0qLoYpkeySVtfdbQg1A_GiB) given by contributor [@lauralorenz](https://github.com/lauralorenz)
 
 ### Contributors
 
-- @lauralorenz
-- @MiriamSexton
-- @dbarbar
-- @dvetal
+- [@lauralorenz](https://github.com/lauralorenz)
+- [@MiriamSexton](https://github.com/MiriamSexton)
+- [@dbarbar](https://github.com/dbarbar)
+- [@dvetal](https://github.com/dvetal)
