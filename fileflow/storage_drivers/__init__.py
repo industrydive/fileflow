@@ -3,7 +3,6 @@ from .file_storage_driver import FileStorageDriver
 from .s3_storage_driver import S3StorageDriver
 
 
-
 def get_storage_driver(
         storage_type=None,
         storage_prefix=None,
@@ -80,3 +79,5 @@ def get_storage_driver(
     raise FileflowError(
         'Storage driver type {} does not exist.'.format(storage_type)
     )
+
+__all__ = ['StorageDriver', 'StorageDriverError', 'FileStorageDriver', 'S3StorageDriver', 'get_storage_driver']
