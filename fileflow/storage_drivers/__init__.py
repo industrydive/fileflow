@@ -28,7 +28,7 @@ def get_storage_driver(
     :param str aws_bucket_name: The S3 bucket name to use. Gets the
         environment name appended to it so buckets are tied to environments.
     :return: A storage driver for reading and writing intermediate data.
-    :rtype: datadive.storagedrivers.StorageDriver
+    :rtype: fileflow.storage_drivers.storage_driver.StorageDriver
     """
 
     # import settings  # TODO: this must be changed to use airflow config

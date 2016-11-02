@@ -14,7 +14,7 @@ The main components of fileflow are
 
 DiveOperator
 ~~~~~~~~~~~~
-The ``DiveOperator`` is a subclass of :py:class:`airflow.models.BaseOperator` that mixes in the basic functionality that allows operators to define which task's data they depend on. You can subclass your own operators or sensors from ``DiveOperator`` exclusively, or mix it in via multi-inheritance with other existing operators to add the data dependency feature. For example, if you want to use the existing :py:class:`airflow.operators.PythonOperator` and mix-in smart-airflow's file targeting feature, you could define your derived class as: ::
+The ``DiveOperator`` is a subclass of :py:class:`airflow.models.BaseOperator` that mixes in the basic functionality that allows operators to define which task's data they depend on. You can subclass your own operators or sensors from ``DiveOperator`` exclusively, or mix it in via multi-inheritance with other existing operators to add the data dependency feature. For example, if you want to use the existing :py:class:`airflow.operators.PythonOperator` and mix-in fileflow's file targeting feature, you could define your derived class as: ::
 
     class DerivedOperator(DiveOperator, PythonOperator):
         ...
@@ -26,7 +26,7 @@ Given that definition, you can specify a given task's dependency on data output 
              ...
              )
 
-Smart-airflow ships with exactly this type of derived operator, which we call ``DivePythonOperator``, that works directly with the second component of smart-airflow, the ``TaskRunner``, to make file detection of upstream targets easy.
+Fileflow ships with exactly this type of derived operator, which we call ``DivePythonOperator``, that works directly with the second component of fileflow, the ``TaskRunner``, to make file detection of upstream targets easy.
 
 TaskRunner
 ~~~~~~~~~~
@@ -60,7 +60,7 @@ All of this is to take advantage of the fact that we've done a bunch of work in 
 storage drivers
 ~~~~~~~~~~~~~~~
 
-The two storage drivers shipped in ``smart-airflow`` deal with the nitty gritty of actually communicating with either the local file system in the case of :py:class:`~fileflow.storage_drivers.file_storage_driver.FileStorageDriver`, or with an S3 bucket in the case of :py:class:`~fileflow.storage_drivers.s3_storage_driver.S3StorageDriver`. The storage driver needs to be able to
+The two storage drivers shipped in ``fileflow`` deal with the nitty gritty of actually communicating with either the local file system in the case of :py:class:`~fileflow.storage_drivers.file_storage_driver.FileStorageDriver`, or with an S3 bucket in the case of :py:class:`~fileflow.storage_drivers.s3_storage_driver.S3StorageDriver`. The storage driver needs to be able to
 
 * derive a path or key name or names from the Airflow TaskInstance context data passed through by the TaskRunner for either upstream tasks (data dependencies) or the current task's target
 * read and write to that path or key name

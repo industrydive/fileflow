@@ -19,7 +19,7 @@ class TestTaskRunner(TestCase):
     """
     def setUp(self):
         # Set up arguments for a :py:class:`airflow.models.TaskInstance`
-        # that will be sent to the :py:class:`datadive.smart-airflow.DivePythonOperator` class
+        # that will be sent to the :py:class:`fileflow.operators.dive_python_operator.DivePythonOperator` class
         self.execution_date = datetime(2015, 1, 1)
         self.dag_id = 'test_taskrunner_task_instance'
         self.task_id = 'fake_task_id'
@@ -27,14 +27,14 @@ class TestTaskRunner(TestCase):
         # normally an operator or sensor, when called by the scheduler, instantiates a :py:class:`airflow.models.TaskInstance`
         # that inherits from the operator what logic it should execute, what dag_id and task_id namespace it is under,
         # and for what execution_date
-        # Here we mock a fake :py:class:`datadive.smart_airflow.TaskRunner`-derivative (``self.fake_task``)
+        # Here we mock a fake :py:class:`fileflow.task_runners.task_runner.TaskRunner`-derivative (``self.fake_task``)
         # so we can instantiate a :py:class:`airflow.models.TaskInstance` with it
         self.fake_task = mock.MagicMock()
         self.fake_task.dag_id = self.dag_id
         self.fake_task.task_id = self.task_id
         task_instance = TaskInstance(self.fake_task, self.execution_date)
 
-        # build the context dictionary for this task and instantiate a :py:class:`datadive.smart_airflow.TaskRunner` with it
+        # build the context dictionary for this task and instantiate a :py:class:`fileflow.task_runners.task_runner.TaskRunner` with it
         # this is normally handled during an :py:class:`airflow.models.BaseOperator`-derived class's :py:meth:`pre_execute` method
         # but here we instead instantiate our own task runner instance in the way divepythonoperator normally would
         # so that we can run its own methods ourselves during the tests
@@ -125,7 +125,7 @@ class TestTaskRunner(TestCase):
 
     def test_get_output_filename(self):
         """
-        Assert we can parse the current :py:class:`datadive.smart_airflow.TaskRunner` to pass relevant data needed to infer the this task's
+        Assert we can parse the current :py:class:`fileflow.task_runners.task_runner.TaskRunner` to pass relevant data needed to infer the this task's
         output file location correctly to the storage driver.
         """
         self.task_runner_instance.get_output_filename()
