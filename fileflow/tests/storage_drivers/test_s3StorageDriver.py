@@ -1,5 +1,5 @@
 from unittest import TestCase
-from datadive.storagedrivers import S3StorageDriver
+from fileflow.storage_drivers import S3StorageDriver
 from datetime import datetime
 from mock import MagicMock
 from moto import mock_s3
@@ -79,7 +79,7 @@ class TestS3StorageDriver(TestCase):
         import tempfile
 
         first_value = 'abc'
-        second_value_file = open('fixtures/subscriber/test_job_levels.json', 'r')
+        second_value_file = open('tests/fixtures/SampleUniformData.json', 'r')
         second_value_string = second_value_file.read()
         second_value_file.seek(0)
         third_value_bytes = bytearray(['a', 'b', '\xe4'])
@@ -160,7 +160,7 @@ class TestS3StorageDriver(TestCase):
 
         # Try longer data from a file
         second_key_name = 'the_dag/the_task/1986-04-30'
-        f = open('fixtures/subscriber/test_job_levels.json', 'r')
+        f = open('tests/fixtures/SampleUniformData.json', 'r')
         self.driver.write_from_stream('the_dag', 'the_task', datetime(1986, 4, 30), f)
 
         # Go back to the start so we can read it in
