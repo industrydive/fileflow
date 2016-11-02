@@ -10,6 +10,7 @@ from airflow.operators import PythonOperator
 
 from .dive_operator import DiveOperator
 
+
 class DivePythonOperator(DiveOperator, PythonOperator):
     """
     Python operator that can send along data dependencies to its callable.
@@ -28,4 +29,3 @@ class DivePythonOperator(DiveOperator, PythonOperator):
         context.update({"data_dependencies": self.data_dependencies})
         instantiated_object = self.python_object(context)
         self.python_callable = getattr(instantiated_object, self.python_method)
-

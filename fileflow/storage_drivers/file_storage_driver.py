@@ -80,5 +80,3 @@ class FileStorageDriver(StorageDriver):
         """
         if not os.path.exists(dir):
             os.makedirs(dir)
-
-

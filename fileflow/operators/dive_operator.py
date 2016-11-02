@@ -10,6 +10,7 @@ from airflow.operators import BaseOperator
 
 from fileflow.storage_drivers import get_storage_driver
 
+
 class DiveOperator(BaseOperator):
     """
     An operator that sets up storage and assigns data dependencies to the
@@ -49,4 +50,3 @@ class DiveOperator(BaseOperator):
         :param value: Value to set this object's storage property to.
         """
         self._storage = value
-

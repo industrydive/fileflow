@@ -80,4 +80,3 @@ def get_storage_driver(
     raise FileflowError(
         'Storage driver type {} does not exist.'.format(storage_type)
     )
-

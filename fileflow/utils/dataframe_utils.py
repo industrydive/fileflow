@@ -72,6 +72,3 @@ def clean_and_write_dataframe_to_csv(data, filename):
     logging.info("Dataframe of shape %s has been stored." % str(data.shape))
 
     return result
-
-
-

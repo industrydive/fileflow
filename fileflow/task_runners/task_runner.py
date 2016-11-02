@@ -12,6 +12,7 @@ import json
 from fileflow.utils import read_and_clean_csv_to_dataframe, clean_and_write_dataframe_to_csv
 from fileflow.storage_drivers import get_storage_driver
 
+
 class TaskRunner(object):
     def __init__(self, context):
 
@@ -200,4 +201,3 @@ class TaskRunner(object):
 
     def run(self, *args, **kwargs):
         raise NotImplementedError("You must implement the run method for this task class.")
-
