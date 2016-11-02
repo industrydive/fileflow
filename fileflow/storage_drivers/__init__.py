@@ -1,6 +1,7 @@
 from .storage_driver import StorageDriver, StorageDriverError
 from .file_storage_driver import FileStorageDriver
 from .s3_storage_driver import S3StorageDriver
+from .. import configuration
 
 
 def get_storage_driver(
@@ -31,38 +32,26 @@ def get_storage_driver(
     :rtype: datadive.storagedrivers.StorageDriver
     """
 
-    # import settings  # TODO: this must be changed to use airflow config
-    class FakeSettings(object):
-        def __init__(self):
-            self.ENVIRONMENT = 'test'
-            self.STORAGE_PREFIX = 'tests/test-output'
-            self.STORAGE_TYPE = 'file'
-            self.AWS_ACCESS_KEY_ID = 'keyid'
-            self.AWS_BUCKET_NAME = 'bucket'
-            self.AWS_SECRET_ACCESS_KEY = 'key'
-
-    settings = FakeSettings()
-
     from fileflow.errors import FileflowError
 
     # Initialize all the things.
     if storage_type is None:
-        storage_type = settings.STORAGE_TYPE
+        storage_type = configuration.get('fileflow', 'storage_type')
 
     if storage_prefix is None:
-        storage_prefix = settings.STORAGE_PREFIX
+        storage_prefix = configuration.get('fileflow', 'storage_prefix')
 
     if environment is None:
-        environment = settings.ENVIRONMENT
+        environment = configuration.get('fileflow', 'environment')
 
     if aws_access_key_id is None:
-        aws_access_key_id = settings.AWS_ACCESS_KEY_ID
+        aws_access_key_id = configuration.get('fileflow', 'aws_access_key_id')
 
     if aws_secret_access_key is None:
-        aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY
+        aws_secret_access_key = configuration.get('fileflow', 'aws_secret_access_key')
 
     if aws_bucket_name is None:
-        aws_bucket_name = settings.AWS_BUCKET_NAME
+        aws_bucket_name = configuration.get('fileflow', 'aws_bucket_name')
 
     # Now get to the real work.
     if storage_type == 'file':
