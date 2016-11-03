@@ -11,10 +11,11 @@ setup(
     packages=['fileflow'],
     install_requires=[
         'airflow~=1.7.0',
-        'pandas==0.17.0'
+        'pandas==0.17.0',
+        'boto~=2.38.0'
     ],
     test_suite='nose.collector',
-    tests_require=['boto~=2.38.0', 'moto~=0.4.18', 'coverage~=4.2', 'nose~=1.3.7', 'mock~=1.0.1'],
+    tests_require=['moto~=0.4.18', 'coverage~=4.2', 'nose~=1.3.7', 'mock~=1.0.1'],
     extras_require={
         'flake8': ['pyflakes==1.0.0',
                    'pep8==1.5.7',
