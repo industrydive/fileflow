@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="fileflow",
@@ -8,7 +8,7 @@ setup(
     url='https://github.com/industrydive/fileflow',
     license='Apache License 2.0',
     zip_safe=False,
-    packages=['fileflow'],
+    packages=find_packages(exclude=['docs', 'tests*']),
     install_requires=[
         'airflow~=1.7.0',
         'pandas==0.17.0',
