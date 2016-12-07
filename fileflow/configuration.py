@@ -1,11 +1,14 @@
 """
 Extend from the airflow configuration and address any missing fileflow related configuration values.
 """
-from airflow import configuration as airflow_configuration
+from ConfigParser import NoSectionError
+from airflow.configuration import conf as airflow_configuration
 import os
 import boto
 
 # Set some fileflow settings to a default if they do not already exist.
+if not airflow_configuration.has_section('fileflow'):
+    airflow_configuration.add_section('fileflow')
 
 if not airflow_configuration.has_option('fileflow', 'environment'):
     airflow_configuration.set('fileflow', 'environment', 'production')
