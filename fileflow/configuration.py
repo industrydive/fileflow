@@ -55,10 +55,10 @@ if not airflow_configuration.has_option('fileflow', 'aws_access_key_id'):
 
 if not airflow_configuration.has_option('fileflow', 'aws_secret_access_key'):
     if aws_secret_access_key_env_var:
-        airflow_configuration.set('fileflow', 'aws_secret_acccess_key', aws_secret_access_key_env_var)
+        airflow_configuration.set('fileflow', 'aws_secret_access_key', aws_secret_access_key_env_var)
     else:
         boto_aws_secret_access_key_default = boto_config.get('Credentials', 'aws_secret_access_key')
-        airflow_configuration.set('fileflow', 'aws_secret_acccess_key', boto_aws_secret_access_key_default)
+        airflow_configuration.set('fileflow', 'aws_secret_access_key', boto_aws_secret_access_key_default)
 
 
 def get(section, key, **kwargs):
