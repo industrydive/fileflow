@@ -1,15 +1,33 @@
 """
 Extend from the airflow configuration and address any missing fileflow related configuration values.
 """
-from ConfigParser import NoSectionError
-from airflow.configuration import conf as airflow_configuration
+
+from airflow import configuration as airflow_configuration
 import os
 import boto
 
-# Set some fileflow settings to a default if they do not already exist.
-if not airflow_configuration.has_section('fileflow'):
-    airflow_configuration.add_section('fileflow')
+def _ensure_section_exists(section_name):
+    """
+    Checks to make sure the config has a section called section_name. If it doesn't, create one.
 
+    EXPLANATION:
+    conf is a singleton in airflow configuration ("conf"). It is an object of a custom airflow class
+    that is a ConfigParser subclass.
+    The proper way to access the config is through the functions defined in airflow.configuration which
+    pass the call the singleton. (Ex: airflow.configuration.get calls conf.get). However, not all methods on conf
+    are abstracted out, including the all important "has_section" & "add_section" (if we try to set an option
+    on a section that doesn't exist, NoSectionError is raised). Therefore, we break the abstraction here once to
+    access the singleton directly
+
+    :param str section: the section
+    """
+    # This uses the singleton described above to make sure the section exists
+    if not airflow_configuration.conf.has_section(section_name):
+        airflow_configuration.conf.add_section(section_name)
+
+_ensure_section_exists('fileflow')
+
+# Set some fileflow settings to a default if they do not already exist.
 if not airflow_configuration.has_option('fileflow', 'environment'):
     airflow_configuration.set('fileflow', 'environment', 'production')
 
@@ -56,3 +74,4 @@ def get(section, key, **kwargs):
     # to the actual ConfigParser subclass (conf)
     # to get to it's get() method
     return airflow_configuration.conf.get(section, key, **kwargs)
+
