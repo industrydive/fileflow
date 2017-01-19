@@ -70,7 +70,7 @@ Since we're working with text I/O obviously this introduces a bunch of decisions
 A full example
 ~~~~~~~~~~~~~~~
 
-.. literalinclude:: ../fileflow/example_dags/fileflow_example.py
+.. literalinclude:: ../../fileflow/example_dags/fileflow_example.py
     :language: python
 
 .. code-block:: bash
