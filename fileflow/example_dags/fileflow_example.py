@@ -29,7 +29,6 @@ class TaskRunnerReadExample(TaskRunner):
         super(TaskRunnerReadExample, self).__init__(context)
         self.output_template = "Read '{}' from '{}'. Writing output to '{}'."
 
-
     def run(self, *args, **kwargs):
         # This is how you read the output of a previous task
         # The argument to read_upstream_file is based on the DAG configuration
@@ -55,7 +54,9 @@ dag = DAG(
     schedule_interval=timedelta(minutes=1)
 )
 
-# The tasks in this DAG will use DivePythonOperator as the operator, which knows how to send a TaskRunner anything in the `data_dependencies` keyword so you can specify more than one file by name to be fed to a downstream task
+# The tasks in this DAG will use DivePythonOperator as the operator,
+# which knows how to send a TaskRunner anything in the `data_dependencies` keyword
+# so you can specify more than one file by name to be fed to a downstream task
 t1 = DivePythonOperator(
     task_id="write_a_file",
     python_method="run",
@@ -76,4 +77,3 @@ t2 = DivePythonOperator(
     owner="airflow",
     dag=dag
 )
-

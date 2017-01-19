@@ -6,6 +6,7 @@ from airflow import configuration as airflow_configuration
 import os
 import boto
 
+
 def _ensure_section_exists(section_name):
     """
     Checks to make sure the config has a section called section_name. If it doesn't, create one.
@@ -24,6 +25,7 @@ def _ensure_section_exists(section_name):
     # This uses the singleton described above to make sure the section exists
     if not airflow_configuration.conf.has_section(section_name):
         airflow_configuration.conf.add_section(section_name)
+
 
 _ensure_section_exists('fileflow')
 
@@ -74,4 +76,3 @@ def get(section, key, **kwargs):
     # to the actual ConfigParser subclass (conf)
     # to get to it's get() method
     return airflow_configuration.conf.get(section, key, **kwargs)
-

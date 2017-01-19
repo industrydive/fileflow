@@ -23,7 +23,7 @@ setup(
                    'flake8==2.5.1',
                    'flake8-debugger==1.4.0',
                    'pep8-naming==0.3.3'],
-         'docs': ['sphinx==1.5.1',
-                  'sphinx-rtd-theme==0.1.9']
+        'docs': ['sphinx==1.5.1',
+                 'sphinx-rtd-theme==0.1.9']
     }
 )
