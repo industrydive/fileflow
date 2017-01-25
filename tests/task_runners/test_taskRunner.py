@@ -17,6 +17,7 @@ class TestTaskRunner(TestCase):
     (or a method that calls it) is called with the correct arguments. Mock is used a lot
     here.
     """
+
     def setUp(self):
         # Set up arguments for a :py:class:`airflow.models.TaskInstance`
         # that will be sent to the :py:class:`fileflow.operators.dive_python_operator.DivePythonOperator` class
@@ -125,7 +126,8 @@ class TestTaskRunner(TestCase):
 
     def test_get_output_filename(self):
         """
-        Assert we can parse the current :py:class:`fileflow.task_runners.task_runner.TaskRunner` to pass relevant data needed to infer the this task's
+        Assert we can parse the current :py:class:`fileflow.task_runners.task_runner.TaskRunner`
+        to pass relevant data needed to infer the this task's
         output file location correctly to the storage driver.
         """
         self.task_runner_instance.get_output_filename()

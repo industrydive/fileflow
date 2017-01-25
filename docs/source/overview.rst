@@ -67,5 +67,36 @@ The two storage drivers shipped in ``fileflow`` deal with the nitty gritty of ac
 
 Since we're working with text I/O obviously this introduces a bunch of decisions the storage drivers have to be making regarding encoding/charsets, file read/write mode, path/key existence, and in the case of putting to S3 over HTTP, content types. All of this is handled by the respective storage driver; the interface for what a storage driver should implement is represented by the base :py:class:`~fileflow.storage_drivers.storage_driver.StorageDriver` class.
 
+A full example
+--------------
 
+.. literalinclude:: ../../fileflow/example_dags/fileflow_example.py
+    :language: python
 
+.. code-block:: bash
+
+    (fileflow)fileflow $ airflow run -sd fileflow/example_dags/ fileflow_example write_a_file 2017-01-01
+    [2017-01-18 16:54:55,245] {__init__.py:36} INFO - Using executor SequentialExecutor
+    Sending to executor.
+    [2017-01-18 16:54:56,080] {__init__.py:36} INFO - Using executor SequentialExecutor
+    Logging into: /Users/llorenz/airflow/logs/fileflow_example/write_a_file/2017-01-01T00:00:00
+    [2017-01-18 16:54:56,995] {__init__.py:36} INFO - Using executor SequentialExecutor
+    (fileflow)fileflow $ airflow run -sd fileflow/example_dags/ fileflow_example read_that_file 2017-01-01
+    [2017-01-18 16:55:30,790] {__init__.py:36} INFO - Using executor SequentialExecutor
+    Sending to executor.
+    [2017-01-18 16:55:32,219] {__init__.py:36} INFO - Using executor SequentialExecutor
+    Logging into: /Users/llorenz/airflow/logs/fileflow_example/read_that_file/2017-01-01T00:00:00
+    (fileflow)fileflow $ tree storage/
+    storage/
+    └── fileflow_example
+        ├── read_that_file
+        │   └── 2017-01-01
+        └── write_a_file
+            └── 2017-01-01
+
+    3 directories, 2 files
+    (fileflow)fileflow $ cat storage/fileflow_example/read_that_file/2017-01-01
+    Read 'This task -- called write_a_file -- was run.' from 'storage/fileflow_example/write_a_file/2017-01-01'. Writing output to 'storage/fileflow_example/read_that_file/2017-01-01'.
+    (fileflow)fileflow $ cat storage/fileflow_example/write_a_file/2017-01-01
+    This task -- called write_a_file -- was run.
+    (fileflow)fileflow $
