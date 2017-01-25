@@ -68,7 +68,7 @@ The two storage drivers shipped in ``fileflow`` deal with the nitty gritty of ac
 Since we're working with text I/O obviously this introduces a bunch of decisions the storage drivers have to be making regarding encoding/charsets, file read/write mode, path/key existence, and in the case of putting to S3 over HTTP, content types. All of this is handled by the respective storage driver; the interface for what a storage driver should implement is represented by the base :py:class:`~fileflow.storage_drivers.storage_driver.StorageDriver` class.
 
 A full example
-~~~~~~~~~~~~~~~
+--------------
 
 .. literalinclude:: ../../fileflow/example_dags/fileflow_example.py
     :language: python
