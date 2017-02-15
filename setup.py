@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="fileflow",
+    version = 'attr: fileflow.__version__',
     description="Airflow plugin to transfer arbitrary files between operators.",
     author='Industry Dive',
     author_email='fileflow@industrydive.com',
