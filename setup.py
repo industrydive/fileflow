@@ -1,8 +1,9 @@
 from setuptools import setup, find_packages
+from fileflow import __version__
 
 setup(
     name="fileflow",
-    version = 'attr: fileflow.__version__',
+    version = __version__,
     description="Airflow plugin to transfer arbitrary files between operators.",
     author='Industry Dive',
     author_email='fileflow@industrydive.com',
