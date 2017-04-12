@@ -3,6 +3,19 @@ Fileflow Overview
 
 Fileflow is a collection of modules that support data transfer between Airflow tasks via file targets and dependencies with either a local file system or S3 backed storage mechanism. The concept is inherited from other pipelining systems such as Make, Drake, Pydoit, and Luigi that organize pipeline dependencies with file targets. In some ways this is an alternative to Airflow's XCOM system, but supports arbitrarily large and arbitrarily formatted data for transfer whereas XCOM can only support a pickle of the size the backend database's BLOB or BINARY LARGE OBJECT implementation can allow.
 
+Installation
+------------
+
+Fileflow has been tested on Python 2.7 and Airflow version 1.7.0.
+
+You can install from github using pip: ::
+
+    pip install git+git://github.com/industrydive/fileflow.git#egg=fileflow
+
+Or build from source by downloading the archive from github, unzipping, navigating to the root directory of the project and using setup.py: ::
+
+    python setup.py install
+
 Concepts
 --------
 
@@ -51,7 +64,7 @@ If you're a snowflake and don't like calling your main logic wrapper ``run()`` a
         fancy_and_unique_task = DivePythonOperator(
                         task_id="yet_aother_unique_task_id",
                         python_object=AClassNameThatSubclassesTaskRunnerAndHasANinjaMoveMethod,
-                        python_methode="ninja_move",
+                        python_method="ninja_move",
                         data_dependencies={"important_data": normal_task.task_id},
                         dag=dag)
 
