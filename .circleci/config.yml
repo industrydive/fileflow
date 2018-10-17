@@ -1,0 +1,83 @@
+version: 2
+workflows:
+  version: 2
+  test:
+    jobs:
+      - linter
+      - test-3.6
+      - test-3.5
+      - test-2.7
+jobs:
+  linter:
+    docker:
+      - image: circleci/python:3.6.1
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          name: initial lint
+          # crash early on stuff we don't want
+          # merge conflicts, debugger traces, print statements
+          command: |
+            sudo apt-get install -y ack-grep
+            ! ack-grep --ignore-dir=storage --ignore-dir=logs --ignore-dir=tests/test-output -i "<<<<<<<|^=======$|>>>>>>>|>> >> >> >|== == == =|<< << << <" --noyaml .
+
+      # Download the cache of flake8 dependencies if we ran "install flake dependencies" already before for this branch
+      - restore_cache:
+          keys:
+          - flake-dependencies
+      - run:
+          name: install flake dependencies
+          command: |
+            mkdir -p /tmp/venv
+            virtualenv /tmp/venv
+            . /tmp/venv/bin/activate
+            pip install --upgrade pip
+            pip install --no-deps pyflakes==1.0.0 pep8==1.5.7 mccabe==0.3.1 flake8==2.5.1 flake8-debugger==1.4.0 pep8-naming==0.3.3
+      # Save the cache of flake8 dependencies if we haven't run "install flake dependencies" yet before for this branch
+      - save_cache:
+          paths:
+            - "/tmp/venv"
+          key: flake-dependencies
+      - run:
+          name: run flake8
+          command: |
+            . /tmp/venv/bin/activate
+            flake8 --output-file=misc_artifacts/flake8_report.txt .
+  test-3.6: &test-template
+    docker:
+      - image: circleci/python:3.6
+    working_directory: ~/repo
+
+    steps:
+        - checkout
+
+        - restore_cache:
+            keys:
+            - v1-dependencies-{{ checksum "setup.py" }}
+            - v1-dependencies-
+        - run:
+            name: Install test dependencies
+            command: |
+              python -m venv venv || virtualenv venv
+              . venv/bin/activate
+              pip install -e .
+        - save_cache:
+            paths:
+            - ./venv
+            key: v1-dependencies-{{ checksum "setup.py" }}
+        - run:
+            name: Run tests
+            command: |
+              . venv/bin/activate
+              python setup.py test
+  test-3.5:
+    <<: *test-template
+    docker:
+      - image: circleci/python:3.5
+  test-2.7:
+    <<: *test-template
+    docker:
+      - image: circleci/python:2.7
