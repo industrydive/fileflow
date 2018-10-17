@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
 from fileflow import __version__
 
+TEST_REQUIRES_PACKAGES = ['moto~=0.4.18', 'coverage~=4.2', 'nose~=1.3.7', 'mock~=1.0.1']
+
 setup(
     name="fileflow",
     version = __version__,
@@ -17,8 +19,9 @@ setup(
         'boto~=2.38.0'
     ],
     test_suite='nose.collector',
-    tests_require=['moto~=0.4.18', 'coverage~=4.2', 'nose~=1.3.7', 'mock~=1.0.1'],
+    tests_require=TEST_REQUIRES_PACKAGES,
     extras_require={
+        'test': TEST_REQUIRES_PACKAGES,
         'flake8': ['pyflakes==1.0.0',
                    'pep8==1.5.7',
                    'mccabe==0.3.1',
