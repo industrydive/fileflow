@@ -131,7 +131,7 @@ class TestFileStorageDriver(TestCase):
             '2016-01-03'
         ]
 
-        self.assertListEqual(filenames, expected)
+        self.assertItemsEqual(filenames, expected)
 
     def test_check_or_create_dir(self):
         """
