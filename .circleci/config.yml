@@ -46,7 +46,7 @@ jobs:
           command: |
             . /tmp/venv/bin/activate
             flake8 --output-file=misc_artifacts/flake8_report.txt .
-  test-3.6: &test-template
+  test-2.7: &test-template
     docker:
       - image: circleci/python:2.7
     working_directory: ~/repo
@@ -77,7 +77,7 @@ jobs:
 #    <<: *test-template
 #    docker:
 #      - image: circleci/python:3.5
-#  test-2.7:
+#  test-3.6:
 #    <<: *test-template
 #    docker:
 #      - image: circleci/python:3.6
