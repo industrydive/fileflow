@@ -4,8 +4,8 @@ workflows:
   test:
     jobs:
       - linter
-      - test-3.6
-      - test-3.5
+#      - test-3.6
+#      - test-3.5
       - test-2.7
 jobs:
   linter:
@@ -73,11 +73,11 @@ jobs:
             command: |
               . venv/bin/activate
               python setup.py test
-  test-3.5:
-    <<: *test-template
-    docker:
-      - image: circleci/python:3.5
-  test-2.7:
-    <<: *test-template
-    docker:
-      - image: circleci/python:3.6
+#  test-3.5:
+#    <<: *test-template
+#    docker:
+#      - image: circleci/python:3.5
+#  test-2.7:
+#    <<: *test-template
+#    docker:
+#      - image: circleci/python:3.6
